@@ -11,9 +11,9 @@ data/games.js         Game entries
 data/members.js       People entries   <- add teammates here
 assets/css/style.css  All styling
 assets/js/main.js     Renders the cards from the data files
+assets/img/brand/     Logo, banner, hero crop, mascot, favicons
 assets/img/games/     Game cover art (16:9)
 assets/img/members/   Headshots (square)
-assets/img/textures/  Background star field and sparkle
 ```
 
 ## Running it locally
@@ -47,10 +47,21 @@ Push to GitHub, then in **Settings → Pages** choose *Deploy from a branch*,
 branch `main`, folder `/ (root)`. The `.nojekyll` file is already present so
 Pages serves the folder as-is.
 
-## Art credit
+## Brand assets
 
-The star-field background (`assets/img/textures/star-pattern.png`) and the
-sparkle (`star.png`) are the studio's own UI art from *Too Early for the Stars*.
-The chamfered corners throughout are borrowed from that game's panel plating.
-The header logo mark is a placeholder — swap the inline SVG in the three HTML
-files when a real mark exists.
+Everything in `assets/img/brand/` is the studio's own art:
+
+| File | Use |
+|------|-----|
+| `mamepro-logo.png` | Master logo lockup, 3000×1500, transparent |
+| `mamepro-logo-480.png` | Header logo — the master shrunk to 480×240 |
+| `mamepro-banner.png` | Master MAMEPRO banner, 2560×1440, white background |
+| `mamepro-hero.png` | Home-page hero — the banner cropped to the artwork with the white made transparent |
+| `bean-mascot.png` | Square mascot, 3000×3000, transparent |
+| `favicon-64.png` / `favicon-180.png` | Tab icon and touch icon, cut from the mascot |
+| `bean-writing.png`, `bean-gaming.png`, `bean-painting.png` | The three individual beans from the banner |
+
+The site palette is sampled from the logo — coral swoosh, bean maroon, the
+wordmark's dark red — and headings use a serif to sit beside the "mamepro."
+lockup. The chamfered corners were kept from the studio's in-game panel art
+for *Too Early for the Stars*.

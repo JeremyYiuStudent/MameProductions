@@ -1,30 +1,38 @@
 /* =========================================================================
    Mame Productions - site styles
 
-   The visual language is lifted from the studio's own UI art (the star field
-   and the chamfered panel plating from "Too Early for the Stars"): deep navy
-   ground, periwinkle ink, four-point sparkles, corners cut at 45 degrees.
+   The palette is sampled from the studio logo: cream paper, the bean's own
+   maroon for edges and small type, the wordmark's dark red for anything you
+   can click, and the coral of the brush swoosh for hover and highlights.
+   Headings are set in a serif to sit beside the "mamepro." lockup. Corners
+   are cut at 45 degrees throughout - the one thing kept from the first pass.
    ========================================================================= */
 
 :root {
-  --bg:          #0b0f22;
-  --bg-raised:   #131a35;
-  --bg-card:     #151c3a;
-  --bg-card-2:   #1a2246;
-  --line:        #2b3466;
-  --line-soft:   #1e2648;
-  --ink:         #eceafa;
-  --ink-dim:     #a9b0dd;
-  --ink-faint:   #737bb0;
-  --accent:      #b9c0ff;
-  --accent-soft: rgba(185, 192, 255, .12);
-  --accent-line: rgba(185, 192, 255, .38);
-  --accent-ink:  #10142c;
-  --radius:      4px;
+  --bg:          #fbf6ef;
+  --bg-raised:   #f4ebe0;
+  --bg-card:     #ffffff;
+  --bg-card-2:   #fffdf9;
+  --line:        #e3d3c8;
+  --line-soft:   #ede2d8;
+  --edge:        #c9a9a4;
+  --ink:         #2d1b1d;
+  --ink-dim:     #6b5352;
+  --ink-faint:   #9a8280;
+  --accent:      #992211;
+  --accent-hover:#7a1a0d;
+  --accent-soft: rgba(153, 34, 17, .07);
+  --accent-line: rgba(153, 34, 17, .35);
+  --accent-ink:  #ffffff;
+  --coral:       #ee6655;
+  --coral-soft:  rgba(238, 102, 85, .12);
+  --maroon:      #885555;
   --chamfer:     12px;
   --maxw:        1120px;
   --font: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
           "Helvetica Neue", Arial, sans-serif;
+  --serif: "Iowan Old Style", "Palatino Linotype", Palatino, Georgia,
+           "Times New Roman", serif;
   --mono: ui-monospace, SFMono-Regular, "SF Mono", Menlo, Consolas, monospace;
 }
 
@@ -32,20 +40,9 @@
 
 html { scroll-behavior: smooth; scroll-padding-top: 92px; }
 
-/* The star field carries a veil on top of it so text keeps its contrast at any
-   scroll depth. Both layers are backgrounds of the same element on purpose: a
-   separate fixed, negative-z-index overlay gets promoted to its own compositing
-   layer on scroll in Chromium and swallows the page. */
 body {
   margin: 0;
-  background-color: var(--bg);
-  background-image:
-    linear-gradient(180deg, rgba(11, 15, 34, .60) 0%, rgba(11, 15, 34, .88) 60%, rgba(11, 15, 34, .95) 100%),
-    url("../img/textures/star-pattern.png");
-  background-size: cover, cover;
-  background-position: center, center top;
-  background-repeat: no-repeat, no-repeat;
-  background-attachment: fixed, fixed;
+  background: var(--bg);
   color: var(--ink);
   font-family: var(--font);
   font-size: 16px;
@@ -55,17 +52,21 @@ body {
 
 img { max-width: 100%; display: block; }
 a { color: var(--accent); text-decoration: none; }
-a:hover { text-decoration: underline; }
+a:hover { color: var(--accent-hover); text-decoration: underline; text-underline-offset: 3px; }
 
-h1, h2, h3, h4 { line-height: 1.2; margin: 0 0 .5em; font-weight: 650; letter-spacing: -.02em; }
-h1 { font-size: clamp(2.2rem, 6vw, 3.5rem); }
-h2 { font-size: clamp(1.5rem, 3.4vw, 2.05rem); }
-h3 { font-size: 1.16rem; }
+h1, h2, h3, h4 {
+  font-family: var(--serif); font-weight: 500;
+  line-height: 1.15; margin: 0 0 .5em; letter-spacing: -.005em;
+  color: var(--ink);
+}
+h1 { font-size: clamp(2.3rem, 6vw, 3.6rem); }
+h2 { font-size: clamp(1.6rem, 3.4vw, 2.2rem); }
+h3 { font-size: 1.3rem; }
 p  { margin: 0 0 1em; }
 
 .wrap { width: 100%; max-width: var(--maxw); margin-inline: auto; padding-inline: 24px; }
 
-/* The signature cut corner, borrowed from the in-game panel plating. */
+/* The cut corner. */
 .chamfer, .plate, .plate-in, .headshot, .headshot-in {
   clip-path: polygon(
     var(--chamfer) 0, calc(100% - var(--chamfer)) 0, 100% var(--chamfer),
@@ -76,11 +77,11 @@ p  { margin: 0 0 1em; }
 
 /* A plate is a chamfered card. clip-path would shear a normal border off at
    the diagonals, so the edge is a 1px parent behind a slightly tighter inner
-   panel - the same way the art plates the corners. */
+   panel. */
 .plate {
   --chamfer: 13px;
   display: flex; padding: 1px;
-  background: var(--line);
+  background: var(--edge);
   transition: background .18s ease, transform .18s ease;
 }
 .plate > .plate-in {
@@ -90,47 +91,44 @@ p  { margin: 0 0 1em; }
   background: var(--bg-card);
   transition: background .18s ease;
 }
-.plate:hover { background: var(--accent-line); transform: translateY(-2px); }
+.plate:hover { background: var(--coral); transform: translateY(-2px); }
 .plate:hover > .plate-in { background: var(--bg-card-2); }
 
 /* ---------------------------------------------------------------- header */
 
 .site-header {
   position: sticky; top: 0; z-index: 50;
-  background: rgba(11, 15, 34, .84);
+  background: rgba(251, 246, 239, .9);
   backdrop-filter: blur(14px);
   border-bottom: 1px solid var(--line-soft);
 }
-.site-header .wrap { display: flex; align-items: center; gap: 28px; height: 70px; }
+.site-header .wrap { display: flex; align-items: center; gap: 28px; height: 78px; }
 
-.brand { display: flex; align-items: center; gap: 11px; color: var(--ink); font-weight: 680; letter-spacing: -.01em; }
-.brand:hover { text-decoration: none; color: var(--ink); }
-.brand svg { flex: none; }
-.brand .brand-sub {
-  color: var(--ink-faint); font-weight: 450; font-size: .74rem;
-  letter-spacing: .18em; text-transform: uppercase;
-}
+/* The lockup is 2:1, so height is what sets how big the wordmark reads. */
+.brand { display: flex; align-items: center; }
+.brand img { height: 60px; width: auto; }
+@media (max-width: 760px) { .brand img { height: 52px; } }
 
-.nav { margin-left: auto; display: flex; align-items: center; gap: 24px; }
+.nav { margin-left: auto; display: flex; align-items: center; gap: 26px; }
 .nav a {
-  color: var(--ink-dim); font-size: .92rem; font-weight: 500;
+  color: var(--ink-dim); font-size: .94rem; font-weight: 500;
   padding: 4px 0; border-bottom: 1.5px solid transparent;
 }
 .nav a:hover { color: var(--ink); text-decoration: none; }
-.nav a[aria-current="page"] { color: var(--ink); border-bottom-color: var(--accent); }
+.nav a[aria-current="page"] { color: var(--ink); border-bottom-color: var(--coral); }
 
 .nav-toggle {
   display: none; margin-left: auto;
-  background: none; border: 1px solid var(--line); border-radius: var(--radius);
+  background: none; border: 1px solid var(--line); border-radius: 4px;
   color: var(--ink); padding: 7px 10px; cursor: pointer; line-height: 0;
 }
 
 @media (max-width: 760px) {
   .nav-toggle { display: block; }
   .nav {
-    position: absolute; top: 70px; left: 0; right: 0;
+    position: absolute; top: 74px; left: 0; right: 0;
     flex-direction: column; align-items: stretch; gap: 0;
-    background: var(--bg-raised); border-bottom: 1px solid var(--line);
+    background: var(--bg); border-bottom: 1px solid var(--line);
     padding: 8px 24px 16px;
   }
   .nav[hidden] { display: none; }
@@ -139,23 +137,36 @@ p  { margin: 0 0 1em; }
 
 /* ------------------------------------------------------------------ hero */
 
-.hero { position: relative; padding: clamp(66px, 12vw, 128px) 0 clamp(48px, 8vw, 84px); }
+.hero { position: relative; padding: clamp(44px, 7vw, 80px) 0 clamp(48px, 8vw, 84px); }
 .hero::before {
-  content: ""; position: absolute; inset: -30% -10% auto -10%;
-  height: 640px; pointer-events: none;
-  background: radial-gradient(ellipse 50% 50% at 22% 45%, rgba(185, 192, 255, .16), transparent 70%);
+  content: ""; position: absolute; inset: 0; pointer-events: none;
+  background: radial-gradient(ellipse 60% 55% at 50% 30%, var(--coral-soft), transparent 70%);
 }
 .hero > .wrap { position: relative; }
+
+.hero-banner {
+  width: min(100%, 880px); margin: 0 auto clamp(28px, 5vw, 48px);
+}
+.hero-banner img { width: 100%; height: auto; }
+
+.hero-copy { text-align: center; max-width: 62ch; margin-inline: auto; }
 .hero .eyebrow {
   display: inline-flex; align-items: center; gap: 9px;
   font-family: var(--mono); font-size: .78rem; letter-spacing: .18em;
-  text-transform: uppercase; color: var(--accent); margin-bottom: 20px;
+  text-transform: uppercase; color: var(--accent); margin-bottom: 18px;
 }
-.hero .lede { font-size: clamp(1.05rem, 2.2vw, 1.26rem); color: var(--ink-dim); max-width: 60ch; }
-.hero-actions { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 32px; }
+.hero .lede { font-size: clamp(1.05rem, 2.2vw, 1.26rem); color: var(--ink-dim); }
+.hero-actions { display: flex; flex-wrap: wrap; justify-content: center; gap: 12px; margin-top: 30px; }
 
-/* small four-point sparkle, drawn rather than loaded */
-.sparkle { width: 11px; height: 11px; flex: none; fill: currentColor; opacity: .9; }
+/* Sub-page heroes have no banner: left-aligned like the rest, and without the
+   glow, which only makes sense sitting behind the artwork. */
+.hero.is-plain .hero-copy { text-align: left; margin-inline: 0; }
+.hero.is-plain .hero-actions { justify-content: flex-start; }
+.hero.is-plain { padding-top: clamp(56px, 10vw, 104px); }
+.hero.is-plain::before { display: none; }
+
+/* small bean, drawn rather than loaded */
+.bean { width: 12px; height: 12px; flex: none; fill: currentColor; }
 
 /* --------------------------------------------------------------- buttons */
 
@@ -164,13 +175,13 @@ p  { margin: 0 0 1em; }
   display: inline-flex; align-items: center; gap: 9px;
   padding: 12px 24px;
   font-size: .92rem; font-weight: 580; letter-spacing: -.005em;
-  border: 1px solid var(--line); color: var(--ink);
+  border: 1px solid var(--edge); color: var(--ink);
   background: var(--bg-card);
   transition: background .16s ease, border-color .16s ease, color .16s ease;
 }
-.btn:hover { text-decoration: none; border-color: var(--accent-line); background: var(--bg-card-2); }
+.btn:hover { text-decoration: none; color: var(--ink); border-color: var(--coral); background: var(--bg-card-2); }
 .btn-primary { background: var(--accent); border-color: var(--accent); color: var(--accent-ink); }
-.btn-primary:hover { background: #cdd2ff; border-color: #cdd2ff; color: var(--accent-ink); }
+.btn-primary:hover { background: var(--accent-hover); border-color: var(--accent-hover); color: var(--accent-ink); }
 
 /* -------------------------------------------------------------- sections */
 
@@ -181,7 +192,7 @@ p  { margin: 0 0 1em; }
   font-family: var(--mono); font-size: .74rem; letter-spacing: .18em;
   text-transform: uppercase; color: var(--ink-faint); margin-bottom: 12px;
 }
-.section-head .kicker .sparkle { color: var(--accent); }
+.section-head .kicker .bean { color: var(--coral); }
 .section-head p { color: var(--ink-dim); margin-bottom: 0; }
 
 .prose { max-width: 66ch; color: var(--ink-dim); }
@@ -191,7 +202,7 @@ p  { margin: 0 0 1em; }
 
 .game-grid { display: grid; gap: 22px; grid-template-columns: repeat(auto-fill, minmax(310px, 1fr)); }
 
-/* Every cover is a star-field placard with the title's initials on it. Real art,
+/* Every cover is a cream placard with the title's initials on it. Real art,
    when there is any, simply sits on top; if the file is missing the img removes
    itself and the placard is what you see. */
 .game-cover {
@@ -199,15 +210,14 @@ p  { margin: 0 0 1em; }
   border-bottom: 1px solid var(--line-soft);
   display: grid; place-items: center;
   background:
-    radial-gradient(ellipse 80% 95% at 28% 18%, rgba(185, 192, 255, .16), transparent 62%),
-    linear-gradient(145deg, #232c62 0%, #141b38 58%, #1c2350 100%);
+    radial-gradient(ellipse 80% 95% at 28% 18%, var(--coral-soft), transparent 62%),
+    linear-gradient(145deg, #f7ecdf 0%, #f1e4d6 58%, #f5e9dc 100%);
 }
 .game-cover > * { grid-area: 1 / 1; }
 .game-cover img { width: 100%; height: 100%; object-fit: cover; }
 .game-cover .placard {
-  font-family: var(--mono); font-size: 1.85rem; font-weight: 600;
-  color: rgba(185, 192, 255, .5); letter-spacing: .14em;
-  text-shadow: 0 0 26px rgba(185, 192, 255, .3);
+  font-family: var(--serif); font-size: 2.1rem; font-weight: 500;
+  color: rgba(136, 85, 85, .55); letter-spacing: .1em;
 }
 
 .game-body { padding: 20px 22px 22px; display: flex; flex-direction: column; flex: 1; }
@@ -231,7 +241,7 @@ p  { margin: 0 0 1em; }
 .tag-row { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 16px; }
 .tag {
   font-size: .74rem; padding: 3px 10px;
-  background: var(--bg-raised); border: 1px solid var(--line-soft); color: var(--ink-faint);
+  background: var(--bg-raised); border: 1px solid var(--line-soft); color: var(--ink-dim);
 }
 
 .game-credits { font-size: .82rem; color: var(--ink-faint); margin-bottom: 14px; }
@@ -253,7 +263,7 @@ p  { margin: 0 0 1em; }
   --size: 72px; --chamfer: 10px;
   width: var(--size); height: var(--size); flex: none;
   padding: 1px; display: flex;
-  background: var(--line);
+  background: var(--edge);
 }
 .headshot-in {
   --chamfer: 9px;
@@ -265,11 +275,11 @@ p  { margin: 0 0 1em; }
 .headshot-in > * { grid-area: 1 / 1; }
 .headshot img { width: 100%; height: 100%; object-fit: cover; }
 .headshot .initials {
-  font-family: var(--mono); font-size: 1.15rem; font-weight: 600;
-  color: var(--accent); letter-spacing: .04em;
+  font-family: var(--serif); font-size: 1.35rem; font-weight: 500;
+  color: var(--maroon); letter-spacing: .04em;
 }
 
-.member-head h3 { margin: 0 0 3px; font-size: 1.06rem; }
+.member-head h3 { margin: 0 0 3px; font-size: 1.2rem; }
 .member-role { font-size: .84rem; color: var(--ink-faint); line-height: 1.45; }
 .member-bio { font-size: .93rem; color: var(--ink-dim); margin-bottom: 14px; }
 
@@ -285,10 +295,10 @@ p  { margin: 0 0 1em; }
 .member-links a svg { width: 17px; height: 17px; }
 
 /* the empty plate holding a place for whoever comes next */
-.plate.is-slot { background: var(--line-soft); }
-.plate.is-slot:hover { transform: none; background: var(--line-soft); }
-.plate.is-slot > .plate-in { background: rgba(19, 26, 53, .45); }
-.plate.is-slot:hover > .plate-in { background: rgba(19, 26, 53, .45); }
+.plate.is-slot { background: var(--line); }
+.plate.is-slot:hover { transform: none; background: var(--line); }
+.plate.is-slot > .plate-in { background: transparent; }
+.plate.is-slot:hover > .plate-in { background: transparent; }
 .plate.is-slot .member-body { justify-content: center; color: var(--ink-faint); min-height: 196px; }
 .plate.is-slot h3 { color: var(--ink-dim); }
 .plate.is-slot p { font-size: .9rem; margin: 0; }
@@ -297,15 +307,15 @@ p  { margin: 0 0 1em; }
 /* --------------------------------------------------------------- callout */
 
 .callout {
-  border: 1px solid var(--line); border-left: 2px solid var(--accent);
-  background: var(--bg-raised);
+  border: 1px solid var(--line); border-left: 3px solid var(--coral);
+  background: var(--bg-card);
   padding: 20px 24px; color: var(--ink-dim); font-size: .94rem;
 }
 .callout p:last-child { margin-bottom: 0; }
 
 /* ---------------------------------------------------------------- footer */
 
-.site-footer { border-top: 1px solid var(--line-soft); padding: 40px 0; margin-top: 24px; background: rgba(11, 15, 34, .5); }
+.site-footer { border-top: 1px solid var(--line-soft); padding: 40px 0; margin-top: 24px; background: var(--bg-raised); }
 .site-footer .wrap { display: flex; flex-wrap: wrap; gap: 18px; align-items: center; justify-content: space-between; }
 .site-footer p { margin: 0; color: var(--ink-faint); font-size: .87rem; }
 .footer-links { display: flex; gap: 18px; font-size: .87rem; }
@@ -319,7 +329,7 @@ p  { margin: 0 0 1em; }
 }
 .skip-link:focus { left: 0; }
 
-:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
+:focus-visible { outline: 2px solid var(--coral); outline-offset: 3px; }
 
 .visually-hidden {
   position: absolute; width: 1px; height: 1px; overflow: hidden;
@@ -329,9 +339,4 @@ p  { margin: 0 0 1em; }
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
   * { transition-duration: .01ms !important; animation-duration: .01ms !important; }
-}
-
-/* background-attachment: fixed is expensive on mobile and iOS ignores it */
-@media (max-width: 760px) {
-  body { background-attachment: scroll, scroll; background-size: cover, 220% auto; }
 }
