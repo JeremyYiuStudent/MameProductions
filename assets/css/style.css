@@ -1,0 +1,337 @@
+/* =========================================================================
+   Mame Productions - site styles
+
+   The visual language is lifted from the studio's own UI art (the star field
+   and the chamfered panel plating from "Too Early for the Stars"): deep navy
+   ground, periwinkle ink, four-point sparkles, corners cut at 45 degrees.
+   ========================================================================= */
+
+:root {
+  --bg:          #0b0f22;
+  --bg-raised:   #131a35;
+  --bg-card:     #151c3a;
+  --bg-card-2:   #1a2246;
+  --line:        #2b3466;
+  --line-soft:   #1e2648;
+  --ink:         #eceafa;
+  --ink-dim:     #a9b0dd;
+  --ink-faint:   #737bb0;
+  --accent:      #b9c0ff;
+  --accent-soft: rgba(185, 192, 255, .12);
+  --accent-line: rgba(185, 192, 255, .38);
+  --accent-ink:  #10142c;
+  --radius:      4px;
+  --chamfer:     12px;
+  --maxw:        1120px;
+  --font: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+          "Helvetica Neue", Arial, sans-serif;
+  --mono: ui-monospace, SFMono-Regular, "SF Mono", Menlo, Consolas, monospace;
+}
+
+*, *::before, *::after { box-sizing: border-box; }
+
+html { scroll-behavior: smooth; scroll-padding-top: 92px; }
+
+/* The star field carries a veil on top of it so text keeps its contrast at any
+   scroll depth. Both layers are backgrounds of the same element on purpose: a
+   separate fixed, negative-z-index overlay gets promoted to its own compositing
+   layer on scroll in Chromium and swallows the page. */
+body {
+  margin: 0;
+  background-color: var(--bg);
+  background-image:
+    linear-gradient(180deg, rgba(11, 15, 34, .60) 0%, rgba(11, 15, 34, .88) 60%, rgba(11, 15, 34, .95) 100%),
+    url("../img/textures/star-pattern.png");
+  background-size: cover, cover;
+  background-position: center, center top;
+  background-repeat: no-repeat, no-repeat;
+  background-attachment: fixed, fixed;
+  color: var(--ink);
+  font-family: var(--font);
+  font-size: 16px;
+  line-height: 1.65;
+  -webkit-font-smoothing: antialiased;
+}
+
+img { max-width: 100%; display: block; }
+a { color: var(--accent); text-decoration: none; }
+a:hover { text-decoration: underline; }
+
+h1, h2, h3, h4 { line-height: 1.2; margin: 0 0 .5em; font-weight: 650; letter-spacing: -.02em; }
+h1 { font-size: clamp(2.2rem, 6vw, 3.5rem); }
+h2 { font-size: clamp(1.5rem, 3.4vw, 2.05rem); }
+h3 { font-size: 1.16rem; }
+p  { margin: 0 0 1em; }
+
+.wrap { width: 100%; max-width: var(--maxw); margin-inline: auto; padding-inline: 24px; }
+
+/* The signature cut corner, borrowed from the in-game panel plating. */
+.chamfer, .plate, .plate-in, .headshot, .headshot-in {
+  clip-path: polygon(
+    var(--chamfer) 0, calc(100% - var(--chamfer)) 0, 100% var(--chamfer),
+    100% calc(100% - var(--chamfer)), calc(100% - var(--chamfer)) 100%,
+    var(--chamfer) 100%, 0 calc(100% - var(--chamfer)), 0 var(--chamfer)
+  );
+}
+
+/* A plate is a chamfered card. clip-path would shear a normal border off at
+   the diagonals, so the edge is a 1px parent behind a slightly tighter inner
+   panel - the same way the art plates the corners. */
+.plate {
+  --chamfer: 13px;
+  display: flex; padding: 1px;
+  background: var(--line);
+  transition: background .18s ease, transform .18s ease;
+}
+.plate > .plate-in {
+  --chamfer: 12px;
+  flex: 1; min-width: 0;
+  display: flex; flex-direction: column;
+  background: var(--bg-card);
+  transition: background .18s ease;
+}
+.plate:hover { background: var(--accent-line); transform: translateY(-2px); }
+.plate:hover > .plate-in { background: var(--bg-card-2); }
+
+/* ---------------------------------------------------------------- header */
+
+.site-header {
+  position: sticky; top: 0; z-index: 50;
+  background: rgba(11, 15, 34, .84);
+  backdrop-filter: blur(14px);
+  border-bottom: 1px solid var(--line-soft);
+}
+.site-header .wrap { display: flex; align-items: center; gap: 28px; height: 70px; }
+
+.brand { display: flex; align-items: center; gap: 11px; color: var(--ink); font-weight: 680; letter-spacing: -.01em; }
+.brand:hover { text-decoration: none; color: var(--ink); }
+.brand svg { flex: none; }
+.brand .brand-sub {
+  color: var(--ink-faint); font-weight: 450; font-size: .74rem;
+  letter-spacing: .18em; text-transform: uppercase;
+}
+
+.nav { margin-left: auto; display: flex; align-items: center; gap: 24px; }
+.nav a {
+  color: var(--ink-dim); font-size: .92rem; font-weight: 500;
+  padding: 4px 0; border-bottom: 1.5px solid transparent;
+}
+.nav a:hover { color: var(--ink); text-decoration: none; }
+.nav a[aria-current="page"] { color: var(--ink); border-bottom-color: var(--accent); }
+
+.nav-toggle {
+  display: none; margin-left: auto;
+  background: none; border: 1px solid var(--line); border-radius: var(--radius);
+  color: var(--ink); padding: 7px 10px; cursor: pointer; line-height: 0;
+}
+
+@media (max-width: 760px) {
+  .nav-toggle { display: block; }
+  .nav {
+    position: absolute; top: 70px; left: 0; right: 0;
+    flex-direction: column; align-items: stretch; gap: 0;
+    background: var(--bg-raised); border-bottom: 1px solid var(--line);
+    padding: 8px 24px 16px;
+  }
+  .nav[hidden] { display: none; }
+  .nav a { padding: 12px 0; border-bottom: 1px solid var(--line-soft); }
+}
+
+/* ------------------------------------------------------------------ hero */
+
+.hero { position: relative; padding: clamp(66px, 12vw, 128px) 0 clamp(48px, 8vw, 84px); }
+.hero::before {
+  content: ""; position: absolute; inset: -30% -10% auto -10%;
+  height: 640px; pointer-events: none;
+  background: radial-gradient(ellipse 50% 50% at 22% 45%, rgba(185, 192, 255, .16), transparent 70%);
+}
+.hero > .wrap { position: relative; }
+.hero .eyebrow {
+  display: inline-flex; align-items: center; gap: 9px;
+  font-family: var(--mono); font-size: .78rem; letter-spacing: .18em;
+  text-transform: uppercase; color: var(--accent); margin-bottom: 20px;
+}
+.hero .lede { font-size: clamp(1.05rem, 2.2vw, 1.26rem); color: var(--ink-dim); max-width: 60ch; }
+.hero-actions { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 32px; }
+
+/* small four-point sparkle, drawn rather than loaded */
+.sparkle { width: 11px; height: 11px; flex: none; fill: currentColor; opacity: .9; }
+
+/* --------------------------------------------------------------- buttons */
+
+.btn {
+  --chamfer: 10px;
+  display: inline-flex; align-items: center; gap: 9px;
+  padding: 12px 24px;
+  font-size: .92rem; font-weight: 580; letter-spacing: -.005em;
+  border: 1px solid var(--line); color: var(--ink);
+  background: var(--bg-card);
+  transition: background .16s ease, border-color .16s ease, color .16s ease;
+}
+.btn:hover { text-decoration: none; border-color: var(--accent-line); background: var(--bg-card-2); }
+.btn-primary { background: var(--accent); border-color: var(--accent); color: var(--accent-ink); }
+.btn-primary:hover { background: #cdd2ff; border-color: #cdd2ff; color: var(--accent-ink); }
+
+/* -------------------------------------------------------------- sections */
+
+.section { padding: clamp(48px, 8vw, 82px) 0; border-top: 1px solid var(--line-soft); }
+.section-head { margin-bottom: 34px; max-width: 64ch; }
+.section-head .kicker {
+  display: inline-flex; align-items: center; gap: 8px;
+  font-family: var(--mono); font-size: .74rem; letter-spacing: .18em;
+  text-transform: uppercase; color: var(--ink-faint); margin-bottom: 12px;
+}
+.section-head .kicker .sparkle { color: var(--accent); }
+.section-head p { color: var(--ink-dim); margin-bottom: 0; }
+
+.prose { max-width: 66ch; color: var(--ink-dim); }
+.prose strong { color: var(--ink); font-weight: 600; }
+
+/* ------------------------------------------------------------ game cards */
+
+.game-grid { display: grid; gap: 22px; grid-template-columns: repeat(auto-fill, minmax(310px, 1fr)); }
+
+/* Every cover is a star-field placard with the title's initials on it. Real art,
+   when there is any, simply sits on top; if the file is missing the img removes
+   itself and the placard is what you see. */
+.game-cover {
+  aspect-ratio: 16 / 9; overflow: hidden;
+  border-bottom: 1px solid var(--line-soft);
+  display: grid; place-items: center;
+  background:
+    radial-gradient(ellipse 80% 95% at 28% 18%, rgba(185, 192, 255, .16), transparent 62%),
+    linear-gradient(145deg, #232c62 0%, #141b38 58%, #1c2350 100%);
+}
+.game-cover > * { grid-area: 1 / 1; }
+.game-cover img { width: 100%; height: 100%; object-fit: cover; }
+.game-cover .placard {
+  font-family: var(--mono); font-size: 1.85rem; font-weight: 600;
+  color: rgba(185, 192, 255, .5); letter-spacing: .14em;
+  text-shadow: 0 0 26px rgba(185, 192, 255, .3);
+}
+
+.game-body { padding: 20px 22px 22px; display: flex; flex-direction: column; flex: 1; }
+.game-meta {
+  display: flex; flex-wrap: wrap; align-items: center; gap: 8px;
+  font-family: var(--mono); font-size: .72rem; letter-spacing: .07em;
+  text-transform: uppercase; color: var(--ink-faint); margin-bottom: 12px;
+}
+.game-meta .dot { opacity: .45; }
+.status {
+  padding: 2px 10px; border: 1px solid var(--line);
+  color: var(--ink-dim); background: var(--bg-raised);
+}
+.status[data-status="Released"],
+.status[data-status="Steam"] { color: var(--accent); border-color: var(--accent-line); background: var(--accent-soft); }
+
+.game-body h3 { margin-bottom: 9px; }
+.game-blurb { color: var(--ink-dim); font-size: .95rem; margin-bottom: 13px; }
+.game-detail { color: var(--ink-faint); font-size: .89rem; margin-bottom: 14px; }
+
+.tag-row { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 16px; }
+.tag {
+  font-size: .74rem; padding: 3px 10px;
+  background: var(--bg-raised); border: 1px solid var(--line-soft); color: var(--ink-faint);
+}
+
+.game-credits { font-size: .82rem; color: var(--ink-faint); margin-bottom: 14px; }
+.game-links { margin-top: auto; display: flex; flex-wrap: wrap; align-items: center; gap: 8px 0; }
+.game-links a { font-size: .85rem; font-weight: 550; display: inline-flex; align-items: center; gap: 6px; }
+.game-links a::after { content: "\2192"; transition: transform .16s ease; }
+.game-links a:hover::after { transform: translateX(3px); }
+.game-links a + a { margin-left: 12px; padding-left: 12px; border-left: 1px solid var(--line); }
+
+/* ------------------------------------------------------------ team cards */
+
+.team-grid { display: grid; gap: 22px; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); }
+
+.member-body { padding: 26px 24px; display: flex; flex-direction: column; flex: 1; }
+
+.member-head { display: flex; align-items: center; gap: 16px; margin-bottom: 16px; }
+
+.headshot {
+  --size: 72px; --chamfer: 10px;
+  width: var(--size); height: var(--size); flex: none;
+  padding: 1px; display: flex;
+  background: var(--line);
+}
+.headshot-in {
+  --chamfer: 9px;
+  flex: 1; overflow: hidden;
+  background: var(--bg-raised);
+  display: grid; place-items: center;
+}
+/* badge and photo share one grid cell: the photo simply covers the initials */
+.headshot-in > * { grid-area: 1 / 1; }
+.headshot img { width: 100%; height: 100%; object-fit: cover; }
+.headshot .initials {
+  font-family: var(--mono); font-size: 1.15rem; font-weight: 600;
+  color: var(--accent); letter-spacing: .04em;
+}
+
+.member-head h3 { margin: 0 0 3px; font-size: 1.06rem; }
+.member-role { font-size: .84rem; color: var(--ink-faint); line-height: 1.45; }
+.member-bio { font-size: .93rem; color: var(--ink-dim); margin-bottom: 14px; }
+
+.member-links { margin-top: auto; padding-top: 16px; border-top: 1px solid var(--line-soft); display: flex; flex-wrap: wrap; gap: 8px; }
+.member-links a {
+  --chamfer: 7px;
+  display: inline-flex; align-items: center; justify-content: center;
+  width: 36px; height: 36px;
+  border: 1px solid var(--line); background: var(--bg-raised); color: var(--ink-dim);
+  transition: color .16s ease, border-color .16s ease, background .16s ease;
+}
+.member-links a:hover { color: var(--accent); border-color: var(--accent-line); background: var(--accent-soft); }
+.member-links a svg { width: 17px; height: 17px; }
+
+/* the empty plate holding a place for whoever comes next */
+.plate.is-slot { background: var(--line-soft); }
+.plate.is-slot:hover { transform: none; background: var(--line-soft); }
+.plate.is-slot > .plate-in { background: rgba(19, 26, 53, .45); }
+.plate.is-slot:hover > .plate-in { background: rgba(19, 26, 53, .45); }
+.plate.is-slot .member-body { justify-content: center; color: var(--ink-faint); min-height: 196px; }
+.plate.is-slot h3 { color: var(--ink-dim); }
+.plate.is-slot p { font-size: .9rem; margin: 0; }
+.plate.is-slot code { font-family: var(--mono); font-size: .84rem; color: var(--accent); }
+
+/* --------------------------------------------------------------- callout */
+
+.callout {
+  border: 1px solid var(--line); border-left: 2px solid var(--accent);
+  background: var(--bg-raised);
+  padding: 20px 24px; color: var(--ink-dim); font-size: .94rem;
+}
+.callout p:last-child { margin-bottom: 0; }
+
+/* ---------------------------------------------------------------- footer */
+
+.site-footer { border-top: 1px solid var(--line-soft); padding: 40px 0; margin-top: 24px; background: rgba(11, 15, 34, .5); }
+.site-footer .wrap { display: flex; flex-wrap: wrap; gap: 18px; align-items: center; justify-content: space-between; }
+.site-footer p { margin: 0; color: var(--ink-faint); font-size: .87rem; }
+.footer-links { display: flex; gap: 18px; font-size: .87rem; }
+.footer-links a { color: var(--ink-dim); }
+
+/* -------------------------------------------------------------- a11y etc */
+
+.skip-link {
+  position: absolute; left: -9999px; top: 0; z-index: 100;
+  background: var(--accent); color: var(--accent-ink); padding: 10px 16px;
+}
+.skip-link:focus { left: 0; }
+
+:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
+
+.visually-hidden {
+  position: absolute; width: 1px; height: 1px; overflow: hidden;
+  clip: rect(0 0 0 0); clip-path: inset(50%); white-space: nowrap;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  * { transition-duration: .01ms !important; animation-duration: .01ms !important; }
+}
+
+/* background-attachment: fixed is expensive on mobile and iOS ignores it */
+@media (max-width: 760px) {
+  body { background-attachment: scroll, scroll; background-size: cover, 220% auto; }
+}
