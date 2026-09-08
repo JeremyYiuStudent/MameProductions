@@ -45,23 +45,6 @@ const GAMES = [
       { label: "Play the demo", url: "https://oriku.itch.io/too-early-for-the-stars" }
     ]
   },
-  {
-    id: "umbral-island",
-    title: "Umbral Island",
-    studio: true,
-    year: "2025",
-    status: "Beta",
-    platforms: ["PC"],
-    engine: "Unity",
-    blurb: "A top-down horror maze crawler built by a core team of two with five collaborators.",
-    detail: "Dialogue framework, 3D modelling and animation, and UI/UX work by Jeremy. Currently in beta.",
-    tags: ["Horror", "Maze Crawler", "Top-down"],
-    credits: [],
-    cover: "",
-    links: [
-      { label: "Build & materials", url: "https://drive.google.com/drive/folders/15628yex6rfRkErGY1Lt4rMNbJaC43tBi" }
-    ]
-  },
 
   /* ---- External credits: work members shipped outside the studio ---- */
   {
