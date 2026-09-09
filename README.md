@@ -18,14 +18,16 @@ assets/img/members/   Headshots (square)
 
 ## Running it locally
 
-Open `index.html` in a browser, or serve the folder so relative paths behave
-exactly as they will in production:
+Serve the folder so relative paths behave exactly as they will in production:
 
 ```bash
-python -m http.server 8000
+python serve.py
 ```
 
-Then visit <http://localhost:8000>.
+Then visit <http://127.0.0.1:8000>. Use `serve.py` rather than the stock
+`python -m http.server` — it's the same thing plus a `Cache-Control: no-store`
+header, so edits to the data files show up on a plain reload instead of the
+browser quietly serving a cached copy for a few minutes.
 
 ## Adding a team member
 

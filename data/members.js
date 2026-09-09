@@ -19,15 +19,24 @@ const MEMBERS = [
   {
     id: "jeremy-yiu",
     name: "Jeremy Yiu",
-    role: "Founder · Gameplay & Systems Engineer",
+    role: "Gameplay & Systems Engineer",
     headshot: "", // add assets/img/members/jeremy-yiu.jpg and point here
-    bio: "Founded Mame Productions with friends to carry small games past the first jam build. Computer Science (Games) at USC; works mostly in Unity and C# on gameplay engineering, AI behaviour systems, narrative implementation, and UI.",
+    bio: "Computer Science (Games) at USC; works mostly in Unity and C# on gameplay engineering, AI behaviour systems, narrative implementation, and UI.",
     tags: ["Unity / C#", "C++", "Gameplay Engineering", "AI Behaviour", "Narrative Systems", "UI", "3D Modelling & Animation"],
     links: {
       website: "https://jeremyyiu.org",
       github: "https://github.com/JeremyYiuStudent",
       linkedin: "https://www.linkedin.com/in/jeremy-yiu-b476b3190/"
     }
+  },
+  {
+    id: "shiori-f",
+    name: "Shiori F.",
+    role: "Writer",
+    headshot: "", // add assets/img/members/shiori-f.jpg and point here
+    bio: "",
+    tags: [],
+    links: {}
   }
 
   /* ---------------------------- COPY FROM HERE ----------------------------
