@@ -5,7 +5,7 @@ plain HTML, one stylesheet, one script, and two data files you edit by hand.
 
 ```
 index.html            Studio home — intro, studio blurb, games, team preview
-games.html            All studio games + members' credits on other teams' games
+games.html            All studio games
 team.html             Full roster of affiliated members
 data/games.js         Game entries
 data/members.js       People entries   <- add teammates here
@@ -37,9 +37,8 @@ half-filled entry never looks broken.
 
 ## Adding a game
 
-Same idea, in `data/games.js`. Set `studio: true` for a Mame Productions
-project or `studio: false` for a credit on someone else's title. A game with no
-`cover` gets a star-field placard with its initials.
+Same idea, in `data/games.js`. Every entry is a Mame Productions project
+(`studio: true`). A game with no `cover` gets a cream placard with its initials.
 
 ## Deploying to GitHub Pages
 

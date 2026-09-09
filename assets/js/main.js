@@ -209,8 +209,11 @@
     const toggle = document.querySelector(".nav-toggle");
     const nav = document.querySelector(".nav");
     if (toggle && nav) {
+      /* The breakpoint lives in the stylesheet only: the CSS shows the toggle
+         when the nav becomes a dropdown, so "is the toggle visible" is the
+         question - no second copy of the pixel value to drift out of sync. */
       const sync = () => {
-        const small = window.matchMedia("(max-width: 720px)").matches;
+        const small = getComputedStyle(toggle).display !== "none";
         nav.hidden = small;
         toggle.setAttribute("aria-expanded", "false");
       };
