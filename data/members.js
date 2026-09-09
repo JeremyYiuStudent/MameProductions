@@ -37,6 +37,24 @@ const MEMBERS = [
     bio: "",
     tags: [],
     links: {}
+  },
+  {
+    id: "yotsubro",
+    name: "Yotsubro",
+    role: "Character & UI Artist",
+    headshot: "", // add assets/img/members/yotsubro.jpg and point here
+    bio: "",
+    tags: [],
+    links: {}
+  },
+  {
+    id: "lu-naru",
+    name: "Lu Naru",
+    role: "Composer",
+    headshot: "", // add assets/img/members/lu-naru.jpg and point here
+    bio: "Music Producer",
+    tags: ["FL Studio", "Davinci Resolve"],
+    links: {youtube: "https://www.youtube.com/@THEBRINGEROFALLCALAMITIES"}
   }
 
   /* ---------------------------- COPY FROM HERE ----------------------------
