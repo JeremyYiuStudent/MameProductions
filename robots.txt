@@ -1,0 +1,5 @@
+User-agent: *
+Allow: /
+Disallow: /serve.py
+
+Sitemap: https://mameproduction.com/sitemap.xml

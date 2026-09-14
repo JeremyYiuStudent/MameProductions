@@ -44,9 +44,23 @@ Same idea, in `data/games.js`. Every entry is a Mame Productions project
 
 ## Deploying to GitHub Pages
 
-Push to GitHub, then in **Settings → Pages** choose *Deploy from a branch*,
-branch `main`, folder `/ (root)`. The `.nojekyll` file is already present so
-Pages serves the folder as-is.
+The site is served at <https://mameproduction.com> from the `main` branch root.
+
+- `CNAME` holds the custom domain. GitHub reads it on every deploy, so it
+  must stay in the repo — deleting it unbinds the domain.
+- `.nojekyll` makes Pages serve the folder as-is.
+- `404.html` is what Pages returns for any unknown path. Its asset paths are
+  root-relative (`/assets/...`) on purpose, because it can be served from any
+  depth.
+- `robots.txt` and `sitemap.xml` reference the live hostname; update them if
+  the domain ever changes, along with the `canonical` / `og:url` tags in each
+  page's `<head>`.
+
+Setup lives in **Settings → Pages**: *Deploy from a branch*, `main`,
+`/ (root)`, custom domain `mameproduction.com`, *Enforce HTTPS* on. DNS at the registrar:
+four `A` records (and `AAAA`) on the apex pointing at GitHub Pages, and a
+`CNAME` on `www` pointing at `jeremyyiustudent.github.io` so `www.` redirects
+to the bare domain.
 
 ## Brand assets
 
