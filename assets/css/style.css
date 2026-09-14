@@ -304,6 +304,17 @@ p  { margin: 0 0 1em; }
 .plate.is-slot p { font-size: .9rem; margin: 0; }
 .plate.is-slot code { font-family: var(--mono); font-size: .84rem; color: var(--accent); }
 
+/* the linked variant: same quiet plate at rest, unmistakably a button on hover */
+.plate.is-link { text-decoration: none; cursor: pointer; }
+.plate.is-link > .plate-in { background: var(--bg-card); }   /* cream like its neighbours, not the flooded slot fill */
+.plate.is-link:hover { transform: translateY(-2px); background: var(--coral); }
+.plate.is-link:hover > .plate-in { background: var(--bg-card-2); }
+.plate.is-link h3 { color: var(--ink); display: inline-flex; align-items: center; gap: .4em; }
+.plate.is-link .arrow { color: var(--accent); transition: transform .16s ease; }
+.plate.is-link:hover .arrow { transform: translateX(4px); }
+.plate.is-link p { color: var(--ink-faint); }
+.plate.is-link:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
+
 /* --------------------------------------------------------------- callout */
 
 .callout {

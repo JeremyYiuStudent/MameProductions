@@ -179,6 +179,16 @@
     "<p>The team is listed from <code>data/members.js</code> &mdash; drop in a name, a line about them, a headshot and whichever links they want shown.</p>" +
     "</div></div></article>";
 
+  /* Home-page preview: two people, then a card that IS the link to the full
+     roster, so the grid stays three-up and the call-to-action has a real
+     footprint instead of trailing under the grid as a bare link. */
+  const moreCard = (total) =>
+    '<a class="plate is-slot is-link" href="team.html">' +
+    '<div class="plate-in"><div class="member-body">' +
+    "<h3>Everyone on the team <span class=\"arrow\">&rarr;</span></h3>" +
+    "<p>All " + total + " members &mdash; what they do and where to find them.</p>" +
+    "</div></div></a>";
+
   /* --------------------------------------------------------------- mount */
 
   function mount(selector, html) {
@@ -197,7 +207,7 @@
 
     const teamHtml = members.map(memberCard).join("");
     mount("[data-team='full']", teamHtml + SLOT_CARD);
-    mount("[data-team='preview']", members.slice(0, 3).map(memberCard).join(""));
+    mount("[data-team='preview']", members.slice(0, 2).map(memberCard).join("") + moreCard(members.length));
 
     const countEl = document.querySelector("[data-count='games']");
     if (countEl) countEl.textContent = String(games.filter((g) => g.studio).length);
