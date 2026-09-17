@@ -75,6 +75,7 @@ Everything in `assets/img/brand/` is the studio's own art:
 | `bean-mascot.png` | Square mascot, 3000×3000, transparent |
 | `favicon-64.png` / `favicon-180.png` | Tab icon and touch icon, cut from the mascot |
 | `bean-writing.png`, `bean-gaming.png`, `bean-painting.png` | The three individual beans from the banner |
+| `bean-chicken.png` | The chicken bean — Jennifer's avatar source |
 
 The site palette is sampled from the logo — coral swoosh, bean maroon, the
 wordmark's dark red — and headings use a serif to sit beside the "mamepro."

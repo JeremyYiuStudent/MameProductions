@@ -20,7 +20,7 @@ const MEMBERS = [
     id: "jeremy-yiu",
     name: "Jeremy Yiu",
     role: "Gameplay & Systems Engineer",
-    headshot: "", // add assets/img/members/jeremy-yiu.jpg and point here
+    headshot: "assets/img/members/jeremy-yiu.png",
     bio: "Computer Science (Games) at USC; works mostly in Unity and C# on gameplay engineering, AI behaviour systems, narrative implementation, and UI.",
     tags: ["Unity / C#", "C++", "Gameplay Engineering", "AI Behaviour", "Narrative Systems", "UI", "3D Modelling & Animation"],
     links: {
@@ -33,7 +33,7 @@ const MEMBERS = [
     id: "shiori-f",
     name: "Shiori F.",
     role: "Writer",
-    headshot: "", // add assets/img/members/shiori-f.jpg and point here
+    headshot: "assets/img/members/shiori-f.png",
     bio: "",
     tags: [],
     links: {}
@@ -42,7 +42,7 @@ const MEMBERS = [
     id: "yotsubro",
     name: "Yotsubro",
     role: "Character & UI Artist",
-    headshot: "", // add assets/img/members/yotsubro.jpg and point here
+    headshot: "assets/img/members/yotsubro.png",
     bio: "",
     tags: [],
     links: {}
@@ -51,7 +51,7 @@ const MEMBERS = [
     id: "lu-naru",
     name: "Lu Naru",
     role: "Composer",
-    headshot: "", // add assets/img/members/lu-naru.jpg and point here
+    headshot: "assets/img/members/lu-naru.jpg",
     bio: "Music Producer",
     tags: ["FL Studio", "Davinci Resolve"],
     links: {youtube: "https://www.youtube.com/@THEBRINGEROFALLCALAMITIES"}
@@ -60,7 +60,7 @@ const MEMBERS = [
     id: "jen-eunychicken",
     name: "Jennifer Kim",
     role: "UI & Character Artist",
-    headshot: "", // add assets/img/members/jen-eunychicken.jpg and point here
+    headshot: "assets/img/members/jen-eunychicken.png",
     bio: "Designer and Illustrator, Figma enjoyer",
     tags: [],
     links: {
