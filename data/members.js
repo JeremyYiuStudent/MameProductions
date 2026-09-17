@@ -55,6 +55,17 @@ const MEMBERS = [
     bio: "Music Producer",
     tags: ["FL Studio", "Davinci Resolve"],
     links: {youtube: "https://www.youtube.com/@THEBRINGEROFALLCALAMITIES"}
+  },
+  {
+    id: "jen-eunychicken",
+    name: "Jennifer Kim",
+    role: "UI & Character Artist",
+    headshot: "", // add assets/img/members/jen-eunychicken.jpg and point here
+    bio: "Designer and Illustrator, Figma enjoyer",
+    tags: [],
+    links: {
+      website: "https://jenkim.framer.website/"
+    }
   }
 
   /* ---------------------------- COPY FROM HERE ----------------------------
