@@ -66,6 +66,15 @@ const MEMBERS = [
     links: {
       website: "https://jenkim.framer.website/"
     }
+  },
+  {
+    id: "chiyu",
+    name: "Chiyu",
+    role: "Artist",
+    headshot: "", // add assets/img/members/chiyu.png and point here
+    bio: "Character Art, Concept Design",
+    tags: [],
+    links: {}
   }
 
   /* ---------------------------- COPY FROM HERE ----------------------------
