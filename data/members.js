@@ -71,7 +71,7 @@ const MEMBERS = [
     id: "chiyu",
     name: "Chiyu",
     role: "Artist",
-    headshot: "", // add assets/img/members/chiyu.png and point here
+    headshot: "assets/img/members/chiyu.jpg",
     bio: "Character Art, Concept Design",
     tags: [],
     links: {}
