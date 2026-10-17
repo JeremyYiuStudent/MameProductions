@@ -69,7 +69,7 @@ const MEMBERS = [
   },
   {
     id: "chiyu",
-    name: "Chiyu",
+    name: "Ivy",
     role: "Artist",
     headshot: "assets/img/members/chiyu.jpg",
     bio: "Character Art, Concept Design",
