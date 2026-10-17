@@ -74,7 +74,9 @@ const MEMBERS = [
     headshot: "assets/img/members/chiyu.jpg",
     bio: "Character Art, Concept Design",
     tags: [],
-    links: {}
+    links: {
+      email: "ivyyao0311@gmail.com"
+    }
   }
 
   /* ---------------------------- COPY FROM HERE ----------------------------
